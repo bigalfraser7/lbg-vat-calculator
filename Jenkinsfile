@@ -5,7 +5,6 @@ pipeline {
     stage('Checkout') {
         steps {
           // Get some code from a GitHub repository
-          // added in a comment by BigAl
           git branch: 'main', url: 'https://github.com/bigalfraser7/lbg-vat-calculator.git'
         }
     }
@@ -16,8 +15,11 @@ pipeline {
         steps {
             withSonarQubeEnv('sonar-qube-1') {        
               sh "${scannerHome}/bin/sonar-scanner"
-            }   
+        }
+        timeout(time: 10, unit: 'MINUTES'){
+          waitForQualityGate abortPipeline: true
         }
     }
   }
+}
 }
