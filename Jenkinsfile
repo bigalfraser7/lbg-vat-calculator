@@ -5,6 +5,7 @@ pipeline {
     stage('Checkout') {
         steps {
           // Get some code from a GitHub repository
+          // added in a comment by BigAl
           git branch: 'main', url: 'https://github.com/bigalfraser7/lbg-vat-calculator.git'
         }
     }
